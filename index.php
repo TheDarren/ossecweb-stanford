@@ -321,7 +321,8 @@
                 },
                 "Yes": function () {
                     $(this).dialog('close');
-                    callback('/ossec/RootReportClear.php?SystemId=all');
+                    callback('/ossec/SyscheckReportClear.php?SystemId=all');
+                    $('#LoadRecordsButton').click();
                 }
             }
         });
@@ -351,7 +352,8 @@
                 },
                 "Yes": function () {
                     $(this).dialog('close');
-                    callback('/ossec/SyscheckReportClear.php?SystemId=all');
+                    callback('/ossec/RootReportClear.php?SystemId=all');
+                    $('#LoadRecordsButton').click();
                 }
             }
         });
