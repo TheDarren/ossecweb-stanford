@@ -51,6 +51,7 @@
 <!-- Include jTable script file. -->
 <script src="/ossec/jtable.2.4.0/jquery.jtable.min.js" type="text/javascript"></script>
 
+<!-- TODO: move to separate file and include here. -->
 <script type="text/javascript">
     $(document).ready(function () {
         $('#ossecContainer').jtable({
@@ -283,7 +284,8 @@
         $('#LoadRecordsButton').click(function (e) {
             e.preventDefault();
             $('#ossecContainer').jtable('load', {
-                Name: $('#name').val()
+                Name: $('#name').val(),
+                Sysadmin: $('#sysadmin').prop('checked')
             });
         });
         //Load all records when page is first shown
@@ -428,6 +430,8 @@
               <div id="primary-nav">
                 <ul class="nav navbar-nav" aria-label="primary navigation">
                   <li id="nav-home"> <a href="./">Home</a></li>
+                  <li > <a href="./webui">OSSEC Web UI</a></li>
+                  <li > <a href="./dash">OSSEC Dashboard</a></li>
                   </li>
                 </ul>
               </div>
@@ -451,8 +455,8 @@
            <div class="filtering">
               <p>
                 <form>
-                    Search host name: <input type="text" name="name" id="name" />
-                    <button type="submit" id="LoadRecordsButton">Find Server</button>
+                    Search host name: <input type="text" name="name" id="name" />&nbsp;&nbsp;<input type="checkbox" name="sysadmin" id="sysadmin" value="true"> Return only my servers &nbsp;&nbsp;
+                    <button type="submit" id="LoadRecordsButton">Find Server(s)</button>
                 </form>
                 <br />
               </p>
@@ -482,6 +486,8 @@
           </div>
           <div class="well">
           <h2>Related Tools</h2>
+          <p>Check out our <a href="./webui">OSSEC Web UI</a></p>
+          <p>For a few graphs of our environment, see the <a href="./dash">Dashboard</a></p>
           <p>For those who want to use the command line, there are remctl tools available using your root principal.  Specific commands are:
           <ul>
           <li>remctl crclogs syscheck ...</li>
@@ -516,6 +522,8 @@
       <div class="col-xs-12 col-sm-3 col-sm-push-3">
         <h3>Related Links</h3>
         <ul>
+          <li>Checkout our <a href="./webui">OSSEC Web UI</a></li>
+          <li><a href="./dash">OSSEC Dashboard</a> (graphs of our environment)</li>
           <li><a href="https://itarch.stanford.edu/confluence/display/CRCSRVRGRP/OSSEC">OSSEC Confluence Documentation</a></li>
           <li><a href="http://ossec.net/">OSSEC.net</a></li>
         </ul>
