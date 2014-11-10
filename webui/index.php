@@ -19,16 +19,58 @@ else
 	$USER_f = "m";
 }
 ?>
+<!DOCTYPE html>
+<!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<title>OSSEC Web Interface - Open Source Security</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="author" content="Daniel B. Cid - ossec.net" />
-		<meta name="copyright" content="2006-2008 by Daniel B. Cid ossec.net" />
-		<meta name="keywords" content="ids, ossec, hids, free software" />
-		<meta name="description" content="OSSEC Web Interface" />
+<head>
+<title>OSSEC Web Interface - Open Source Security</title>
+<!-- TemplateParam name="theme" type="text" value="cardinal" -->
+
+<!-- Meta -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Daniel B. Cid - ossec.net" />
+<meta name="copyright" content="2006-2008 by Daniel B. Cid ossec.net" />
+<meta name="keywords" content="ids, ossec, hids, free software" />
+<meta name="description" content="OSSEC Web Interface" />
+
+<!-- CSS -->
+<link rel="stylesheet" href="/ossec/assets/cardinal/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" type="text/css" />
+<link rel="stylesheet" href="/ossec/assets/cardinal/css/base.min.css?v=0.1" type="text/css" />
+<link rel="stylesheet" href="/ossec/assets/cardinal/css/custom.css?v=0.1" type="text/css"/>
+<!--[if lt IE 9]>
+  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if IE 8]>
+  <link rel="stylesheet" type="text/css" href="/ossec/assets/cardinal/css/ie/ie8.css" />
+<![endif]-->
+<!--[if IE 7]>
+  <link rel="stylesheet" type="text/css" href="/ossec/assets/cardinal/css/ie/ie7.css" />
+<![endif]-->
+<!-- JS and jQuery --> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> 
+<script src="/ossec/assets/cardinal/js/modernizr.custom.17475.js"></script> 
+<script src="/ossec/assets/cardinal/js/bootstrap.min.js"></script> 
+
+<!--[if lt IE 9]>
+    <script src="/ossec/assets/cardinal/js/respond.js"></script>
+<![endif]--> 
+
+<!-- custom JS -->
+<script src="/ossec/assets/cardinal/js/base.js?v=1.0"></script>
+<script src="/ossec/assets/cardinal/js/custom.js"></script>
+<script src="/ossec/jquery-ui-1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+<link href="/ossec/jquery-ui-1.11.1/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="/ossec/jquery-ui-1.11.1/jquery-ui.theme.css" rel="stylesheet" type="text/css" />
+
+
         <?php
         
         /* If we are in the main page, refresh the results every 90 seconds.*/
@@ -45,13 +87,13 @@ else
         <script type="text/javascript" src="js/calendar-setup.js"></script>
         <script type="text/javascript" src="js/prototype.js"></script>
         <script type="text/javascript" src="js/hide.js"></script>
-        
-        <link rel="stylesheet" rev="stylesheet"
-                      href="css/css.css" type="text/css" />
+
+<!-- TODO: remove if uneeded -->
+<!--        <link rel="stylesheet" rev="stylesheet"
+                      href="css/css.css" type="text/css" /> -->
 	</head>
     
-<body>
-<br/>
+<body class="home"> <!-- class="home" underlines the Home link in the top nav -->
 
 
 <?php 
@@ -68,7 +110,7 @@ else
     }
 ?>
 
-  <div id="container">
+  <!-- Remove if not needed <div id="container"> -->
     <div id="content_box">
     <div id="content" class="pages">
     <a name="top"></a>
@@ -183,6 +225,6 @@ else
         return(1);
     }
 ?>
-    </div>
+<!-- remove if not needed    </div> -->
 </body>
 </html>
