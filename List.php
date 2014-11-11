@@ -17,27 +17,31 @@ unset ($mdr);
 
 $mysys = array();
 
+# Search by name, check if sysadin for filter.
 if (isset($name) and $name != '') {
   foreach ($systems as $row) {
     $row = rtrim($row, ",");
     $row = str_getcsv($row);
-      if (strpos($row[1], $name) !== false) {
-          if (isset($sysadmin) and $sysadmin != 'false') {
-            if ($hs[$row[1]] == $_SERVER['REMOTE_USER']) {
-              $mysys[] = array_combine($headers, $row);
-            }
-          } else {
-            $mysys[] = array_combine($headers, $row);
-          }
+    if (strpos($row[1], $name) !== false) {
+      if (isset($sysadmin) and $sysadmin != 'false') {
+        $ln = explode("\s", $row[1])[0];
+        if ($hs[$ln] == $_SERVER['REMOTE_USER']) {
+          $mysys[] = array_combine($headers, $row);
+        }
+      } else {
+        $mysys[] = array_combine($headers, $row);
       }
+    }
   }
 }
 else {
+  # Return all systems, still check if sysadmin for filter.
   foreach($systems as $row) {
     $row = rtrim($row, ",");
     $row = str_getcsv($row);
     if (isset($sysadmin) and $sysadmin != 'false') {
-      if ($hs[$row[1]] == $_SERVER['REMOTE_USER']) {
+      $ln = explode("\s", $row[1])[0];
+      if ($hs[$ln] == $_SERVER['REMOTE_USER']) {
         $mysys[] = array_combine($headers, $row);
       }
     } else {
@@ -46,6 +50,12 @@ else {
   }
 }
 
+# Alphabetical sort on hostname for results.
+function cmp($a, $b) {
+  return strcmp($a['Name'], $b['Name']);
+}
+
+usort($mysys, 'cmp');
 
 $json['Result'] = "OK";
 $json['Records'] = $mysys;
