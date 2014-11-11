@@ -3,9 +3,9 @@
 
  License:: Permission is hereby granted, free of charge, to any person
  obtaining a copy of this software and associated documentation files (the
- "Software"), not inluding OSSEC Web UI or OSSEC Dashboard that have separate
- licenses in their subdirectories, to deal in the Software without restriction,
- including without limitation the rights to use, copy, modify, merge, publish,
+ "Software"), not inluding OSSEC Web UI, OSSEC Dashboard, JTable or JQuery that
+ have separate licenses, to deal in the Software without restriction, including
+ without limitation the rights to use, copy, modify, merge, publish,
  distribute, sublicense, and/or sell copies of the Software, and to permit
  persons to whom the Software is furnished to do so, subject to the following
  conditions:
