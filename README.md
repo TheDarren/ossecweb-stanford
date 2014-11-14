@@ -12,3 +12,5 @@ included for reference.
 The two commands referenced from the sudoers located in /usr/local/bin for
 ossec-add and ossec-del are very simple wrappers around adding and removing
 agents. These scripts have not been included here.
+
+See the Screen Shot.png for how the web UI looks.
