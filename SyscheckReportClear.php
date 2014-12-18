@@ -6,7 +6,7 @@ if (!is_numeric($id) and $id != 'all') {
   $json['Message'] = "Provided SystemId is not an integer: $id";
 }
 else {
-  $results["Message"] = `sudo /var/ossec/bin/syscheck_control -u $id`;
+  $results["Message"] = shell_exec('sudo /var/ossec/bin/syscheck_control -u $id');
 
   $json['Result'] = "OK";
 }

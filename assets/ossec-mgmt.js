@@ -221,9 +221,19 @@ $(document).ready(function () {
               title: 'Status',
               width: '20%',
               create: false,
-              edit: false
+              edit: false,
+              display: function (data) {
+                  if ( data.record.Active != 'Active' && 
+                    data.record.Active != 'Active/Local' ) {
+                      return ("<font color=red>"+data.record.Active+"</font>");
+                  }
+                  else {
+                      return (data.record.Active);
+                  }
+              }
           }
-      }
+      },
+      
   });
   //Re-load records when user click 'load records' button.
   $('#LoadRecordsButton').click(function (e) {
