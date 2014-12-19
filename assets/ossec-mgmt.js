@@ -248,7 +248,8 @@ $(document).ready(function () {
       e.preventDefault();
       $('#ossecContainer').jtable('load', {
           Name: $('#name').val(),
-          Sysadmin: $('#sysadmin').prop('checked')
+          Sysadmin: $('#sysadmin').prop('checked'),
+          User: $('#user').val()
       });
   });
   //Load all records when page is first shown
@@ -379,4 +380,17 @@ function UpdateSysSelected() {
       }
   });
 
+}
+
+// uncheck sysadmin when user selected
+function clearSysadmin() {
+  var sysadmin = document.getElementById("sysadmin");
+  sysadmin.checked = false;
+}
+
+// unselect user when "return only my servers" is checked
+function clearUser() {
+  var user = document.getElementById("user");
+  var sysadmin = document.getElementById("sysadmin");
+  user.selectedIndex = -1;
 }

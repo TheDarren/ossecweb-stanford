@@ -4,6 +4,15 @@ $start = $_GET['jtStartIndex'];
 $pgSize = $_GET['jtPageSize'];
 $sorting = $_GET['jtSorting'];
 $sysadmin = $_POST['Sysadmin'];
+$user = $_POST['User'];
+
+if (isset($user) && $user != 'false' && $user != '') {
+  $sysadmin = $user;
+}
+elseif (isset($sysadmin) && $sysadmin != 'false' && $sysadmin != '') {
+  $sysadmin = $_SERVER['REMOTE_USER'];
+}
+
 $systems = array_filter(explode("\n", shell_exec("sudo /var/ossec/bin/syscheck_control -ls")));
 $headers = array ("SystemId", "Name", "IP", "Active");
 
@@ -28,7 +37,7 @@ if (isset($name) and $name != '') {
     if (strpos($row[1], $name) !== false) {
       if (isset($sysadmin) and $sysadmin != 'false') {
         $ln = explode("\s", $row[1])[0];
-        if ($hs[$ln] == $_SERVER['REMOTE_USER']) {
+        if ($hs[$ln] == $sysadmin) {
           $mysys[] = array_combine($headers, $row);
         }
       } else {
@@ -44,7 +53,7 @@ else {
     $row = str_getcsv($row);
     if (isset($sysadmin) and $sysadmin != 'false') {
       $ln = explode("\s", $row[1])[0];
-      if ($hs[$ln] == $_SERVER['REMOTE_USER']) {
+      if ($hs[$ln] == $sysadmin) {
         $mysys[] = array_combine($headers, $row);
       }
     } else {

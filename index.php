@@ -146,7 +146,11 @@
                       <td>Search host name: </td><td><input type="text" name="name" id="name" />&nbsp;&nbsp;</td>
                     </tr>
                     <tr>
-                      <td>Return only my servers: &nbsp;&nbsp;</td><td><input type="checkbox" name="sysadmin" id="sysadmin" value="true"></td>
+                      <td>Return only my servers: &nbsp;&nbsp;</td><td><input type="checkbox" name="sysadmin" id="sysadmin" value="true" onclick="clearUser();"></td>
+                    </tr>
+                    <tr>
+                      <td>... Or select sysadmin:</td>
+                      <td><?php require './Users.php'; ?></td>
                     </tr>
                     </table>
                   <button type="submit" id="LoadRecordsButton">Find Server(s)</button>
