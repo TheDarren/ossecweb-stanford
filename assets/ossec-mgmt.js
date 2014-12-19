@@ -9,6 +9,8 @@ $(document).ready(function () {
       selectOnRowClick: false,
       paging: true,
       pageSize: 50,
+      sorting: true,
+      defaultSorting: 'Name',
       actions: {
           listAction: '/ossec/List.php',
           createAction: '/ossec/Create.php',
@@ -20,6 +22,7 @@ $(document).ready(function () {
               key: true,
               edit: false,
               create: false,
+              sorting: true,
               // comment out below for debug to see ID
               list: false
           },
@@ -27,6 +30,7 @@ $(document).ready(function () {
               title: '<span class="ui-icon ui-icon-info"></span>',
               edit: false,
               create: false,
+              sorting: false,
               width: '5%',
               display: function (infoData) {
                   //Create an image that will be used to open child table
@@ -70,6 +74,7 @@ $(document).ready(function () {
               sorting: false,
               edit: false,
               create: false,
+              sorting: false,
               display: function (reportData) {
                   //Create an image that will be used to open child table
                   var $img = $('<img src="/ossec/list_metro.png" title="View Syscheck Report" name="syscheck" id="syscheck"/>');
@@ -122,6 +127,7 @@ $(document).ready(function () {
               sorting: false,
               edit: false,
               create: false,
+              sorting: false,
               display: function (rootData) {
                   //Create an image that will be used to open child table
                   var $img = $('<img src="/ossec/list_metro.png" title="View Rootcheck Report" name="rootcheck" id="rootcheck"/>');
@@ -171,6 +177,7 @@ $(document).ready(function () {
               edit: false,
               width: '5%',
               create: false,
+              sorting: false,
               title: 'Key',
               display: function (keyData) {
                   //Create an image that will be used to open child table

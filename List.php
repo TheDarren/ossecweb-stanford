@@ -2,6 +2,7 @@
 $name = $_POST['Name'];
 $start = $_GET['jtStartIndex'];
 $pgSize = $_GET['jtPageSize'];
+$sorting = $_GET['jtSorting'];
 $sysadmin = $_POST['Sysadmin'];
 $systems = array_filter(explode("\n", shell_exec("sudo /var/ossec/bin/syscheck_control -ls")));
 $headers = array ("SystemId", "Name", "IP", "Active");
@@ -52,9 +53,17 @@ else {
   }
 }
 
-# Alphabetical sort on hostname for results.
+# Sort on $sorting for results.
 function cmp($a, $b) {
-  return strcmp($a['Name'], $b['Name']);
+  global $sorting;
+  list($sName, $order) = split (' ', $sorting);
+
+  if ($order == 'ASC') {
+    return strcmp($a[$sName], $b[$sName]);
+  }
+  else {
+    return strcmp($b[$sName], $a[$sName]);
+  }
 }
 
 usort($mysys, 'cmp');
