@@ -2,8 +2,8 @@
 $name = $_POST['Name'];
 
 if (checkdnsrr($name, "A") or checkdnsrr($name, "CNAME")) {
-    $create = shell_exec('sudo /usr/local/bin/ossec-add $name 2>&1');
-    $systems = array_filter(str_getcsv(shell_exec('sudo /var/ossec/bin/syscheck_control -ls'), "\n" ));
+    $create = shell_exec("sudo /usr/local/bin/ossec-add $name 2>&1");
+    $systems = array_filter(str_getcsv(shell_exec("sudo /var/ossec/bin/syscheck_control -ls"), "\n" ));
     $headers = array ("SystemId", "Name", "IP", "Active");
     foreach ($systems as $line) {
         if (strpos($line, $name) !== false) {

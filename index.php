@@ -141,29 +141,38 @@
            <div class="filtering">
               <p>
                 <form>
-                    Search host name: <input type="text" name="name" id="name" />&nbsp;&nbsp;<input type="checkbox" name="sysadmin" id="sysadmin" value="true"> Return only my servers &nbsp;&nbsp;
-                    <button type="submit" id="LoadRecordsButton">Find Server(s)</button>
+                  <table>
+                    <tr>
+                      <td>Search host name: </td><td><input type="text" name="name" id="name" />&nbsp;&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>Return only my servers: &nbsp;&nbsp;</td><td><input type="checkbox" name="sysadmin" id="sysadmin" value="true"></td>
+                    </tr>
+                    </table>
+                  <button type="submit" id="LoadRecordsButton">Find Server(s)</button>
                 </form>
-                <br />
               </p>
-              <p>
-                <button onclick="ExpandSysButton();">Expand syscheck for selected</button>
-                <button onclick="ExpandRootButton();">Expand rootcheck for selected</button>
-              </p>
-              
           </div>
           <div id="ossecContainer"></div>
           <div>
             <p />
             <p>
-            <button onclick="UpdateSysAll();">Update syscheck for ALL</button>
-            <button onclick="UpdateRootAll();">Update rootcheck for ALL</button>
             <div id="dialog-confirm"></div>
             </p>
           </div>
         </div>
         <div id="sidebar-second" class="col-md-3 col-md-pull-9">
           <div class="well">
+            <h2>Expand...</h2>
+              <button onclick="ExpandSysButton();">... syscheck for selected</button><br />
+              <button onclick="ExpandRootButton();">... rootcheck for selected</button><br />
+            <h2>Update...</h2>
+              <button onclick="UpdateSysSelected();">... syscheck for selected</button><br />
+              <button onclick="UpdateRootSelected();">... rootcheck for selected</button><br /> &nbsp;<br />
+
+              <button onclick="UpdateSysAll();">... syscheck for ALL</button><br />
+              <button onclick="UpdateRootAll();">... rootcheck for ALL</button><br />
+
             <h2>About OSSEC Management</h2>
             <p>The following management interface is built on jtable/jquery.</p>
             <p>Use the "Add new record" button (top right in the table) to add a new OSSEC client (add using the FQDN only). Retrieve the agent key by clicking in the "Key" column for the new server. To delete a OSSEC client, click the trash icon in the row listing the server.</p>

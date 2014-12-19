@@ -7,7 +7,8 @@ $(document).ready(function () {
       multiselect: true,
       selectingCheckboxes: true,
       selectOnRowClick: false,
-      //paging: true,
+      paging: true,
+      pageSize: 50,
       actions: {
           listAction: '/ossec/List.php',
           createAction: '/ossec/Create.php',
@@ -317,3 +318,58 @@ function UpdateRootAll() {
 
 }
 
+function UpdateRootSelected() {
+    $("#dialog-confirm").html("Are you sure you want to clear/update the selected rootcheck reports? This should only be done after reviewing the reports.");
+
+  // Define the Dialog and its properties.
+  $("#dialog-confirm").dialog({
+      resizable: false,
+      modal: true,
+      title: "Confirm you want to clear Roocheck for selected",
+      height: 250,
+      width: 400,
+      buttons: {
+          "No": function () {
+              $(this).dialog('close');
+          },
+          "Yes": function () {
+              $(this).dialog('close');
+              var $selectedRows = $('#ossecContainer').jtable('selectedRows');
+              $selectedRows.each(function() {
+                var record = $(this).data('record');
+                callback('/ossec/RootReportClear.php?SystemId='+record.SystemId);
+              });
+              $('#LoadRecordsButton').click();
+          }
+      }
+  });
+
+}
+
+function UpdateSysSelected() {
+    $("#dialog-confirm").html("Are you sure you want to clear/update the selected syscheck reports? This should only be done after reviewing the reports.");
+
+  // Define the Dialog and its properties.
+  $("#dialog-confirm").dialog({
+      resizable: false,
+      modal: true,
+      title: "Confirm you want to clear Syscheck for selected",
+      height: 250,
+      width: 400,
+      buttons: {
+          "No": function () {
+              $(this).dialog('close');
+          },
+          "Yes": function () {
+              $(this).dialog('close');
+              var $selectedRows = $('#ossecContainer').jtable('selectedRows');
+              $selectedRows.each(function() {
+                var record = $(this).data('record');
+                callback('/ossec/SyscheckReportClear.php?SystemId='+record.SystemId);
+              });
+              $('#LoadRecordsButton').click();
+          }
+      }
+  });
+
+}

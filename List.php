@@ -1,13 +1,15 @@
 <?php
 $name = $_POST['Name'];
+$start = $_GET['jtStartIndex'];
+$pgSize = $_GET['jtPageSize'];
 $sysadmin = $_POST['Sysadmin'];
-$systems = array_filter(explode("\n", shell_exec('sudo /var/ossec/bin/syscheck_control -ls')));
+$systems = array_filter(explode("\n", shell_exec("sudo /var/ossec/bin/syscheck_control -ls")));
 $headers = array ("SystemId", "Name", "IP", "Active");
 
 $hs = array();
 $mdr = array();
 if (isset($sysadmin) and $sysadmin != 'false') {
-  $mdr = array_filter(explode("\n", shell_exec('k5start -qUf /etc/service.crcweb -- remctl frankoz1 mdr query "su_support is SA-CRC; su_sysadmin0"')));
+  $mdr = array_filter(explode("\n", shell_exec("k5start -qUf /etc/service.crcweb -- remctl frankoz1 mdr query 'su_support is SA-CRC; su_sysadmin0'")));
   foreach ($mdr as $s) {
     $s = explode(': ', $s);
     $hs[$s[0]] = $s[1];
@@ -57,7 +59,10 @@ function cmp($a, $b) {
 
 usort($mysys, 'cmp');
 
+$results = array_slice($mysys,$start,$pgSize);
+
 $json['Result'] = "OK";
-$json['Records'] = $mysys;
+$json['Records'] = $results;
+$json['TotalRecordCount'] = count($mysys);
 echo json_encode($json);
 ?>

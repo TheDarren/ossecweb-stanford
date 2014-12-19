@@ -6,7 +6,7 @@ if (!is_numeric($id)) {
   $json['Message'] = "Provided SystemId is not an integer: $id";
 }
 else {
-  $results["Report"] = nl2br(htmlspecialchars(shell_exec('sudo /var/ossec/bin/rootcheck_control -i $id')));
+  $results["Report"] = nl2br(htmlspecialchars(shell_exec("sudo /var/ossec/bin/rootcheck_control -i $id")));
   $results["SystemId"] = $id;
 
   $json['Result'] = "OK";
