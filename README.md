@@ -9,8 +9,11 @@ To use the management jQuery/jTable front-end, you will need to give the user
 apache is running as access to execute sudo commands.  The sudoers file is
 included for reference.
 
-The two commands referenced from the sudoers located in /usr/local/bin for
-ossec-add and ossec-del are very simple wrappers around adding and removing
-agents. These scripts have not been included here.
+The two commands referenced from the sudoers (ossec-add and ossec-del) are
+located in ./bin for reference, but should be soft linked into /usr/local/bin.
 
-See the Screen Shot.png for how the web UI looks.
+The Screen Shot.png is an overview of the UI.
+
+Inactive agents are highlighted in red, and you can sort the table on name, IP,
+or active status in the table.  Pagination is also available for those having
+many agents.
