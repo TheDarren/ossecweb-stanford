@@ -1,10 +1,16 @@
 <?php
+# Include security functions.
+require 'Security.php';
+# Init security db to check for r or w access.
+$db = dbinit($_SERVER['REMOTE_USER']);
+
 $name = $_POST['Name'];
 $start = $_GET['jtStartIndex'];
 $pgSize = $_GET['jtPageSize'];
 $sorting = $_GET['jtSorting'];
 $sysadmin = $_POST['Sysadmin'];
 $user = $_POST['User'];
+
 
 if (isset($user) && $user != 'false' && $user != '') {
   $sysadmin = $user;
@@ -29,7 +35,7 @@ unset ($mdr);
 
 $mysys = array();
 
-# Search by name, check if sysadin for filter.
+# Search by name, check if sysadmin for filter.
 if (isset($name) and $name != '') {
   foreach ($systems as $row) {
     $row = rtrim($row, ",");
@@ -38,10 +44,15 @@ if (isset($name) and $name != '') {
       if (isset($sysadmin) and $sysadmin != 'false') {
         $ln = explode("\s", $row[1])[0];
         if ($hs[$ln] == $sysadmin) {
+          if (has_r_access($db, $_SERVER['REMOTE_USER'], $ln)) {
+            $mysys[] = array_combine($headers, $row);
+          }
+        }
+      } 
+      else {
+        if (has_r_access($db,$_SERVER['REMOTE_USER'],explode("\s",$row[1])[0])){
           $mysys[] = array_combine($headers, $row);
         }
-      } else {
-        $mysys[] = array_combine($headers, $row);
       }
     }
   }
@@ -54,10 +65,15 @@ else {
     if (isset($sysadmin) and $sysadmin != 'false') {
       $ln = explode("\s", $row[1])[0];
       if ($hs[$ln] == $sysadmin) {
+        if (has_r_access($db, $_SERVER['REMOTE_USER'],$ln)) {
+          $mysys[] = array_combine($headers, $row);
+        }
+      }
+    } 
+    else {
+      if (has_r_access($db,$_SERVER['REMOTE_USER'],explode("\s", $row[1])[0])){
         $mysys[] = array_combine($headers, $row);
       }
-    } else {
-      $mysys[] = array_combine($headers, $row);
     }
   }
 }

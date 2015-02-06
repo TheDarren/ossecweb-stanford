@@ -41,34 +41,34 @@ else
 <meta name="description" content="OSSEC Web Interface" />
 
 <!-- CSS -->
-<link rel="stylesheet" href="/ossec/assets/cardinal/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="../assets/cardinal/css/bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" type="text/css" />
-<link rel="stylesheet" href="/ossec/assets/cardinal/css/base.min.css?v=0.1" type="text/css" />
-<link rel="stylesheet" href="/ossec/assets/cardinal/css/custom.css?v=0.1" type="text/css"/>
+<link rel="stylesheet" href="../assets/cardinal/css/base.min.css?v=0.1" type="text/css" />
+<link rel="stylesheet" href="../assets/cardinal/css/custom.css?v=0.1" type="text/css"/>
 <!--[if lt IE 9]>
   <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 <!--[if IE 8]>
-  <link rel="stylesheet" type="text/css" href="/ossec/assets/cardinal/css/ie/ie8.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/cardinal/css/ie/ie8.css" />
 <![endif]-->
 <!--[if IE 7]>
-  <link rel="stylesheet" type="text/css" href="/ossec/assets/cardinal/css/ie/ie7.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/cardinal/css/ie/ie7.css" />
 <![endif]-->
 <!-- JS and jQuery --> 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> 
-<script src="/ossec/assets/cardinal/js/modernizr.custom.17475.js"></script> 
-<script src="/ossec/assets/cardinal/js/bootstrap.min.js"></script> 
+<script src="../assets/cardinal/js/modernizr.custom.17475.js"></script> 
+<script src="../assets/cardinal/js/bootstrap.min.js"></script> 
 
 <!--[if lt IE 9]>
-    <script src="/ossec/assets/cardinal/js/respond.js"></script>
+    <script src="../assets/cardinal/js/respond.js"></script>
 <![endif]--> 
 
 <!-- custom JS -->
-<script src="/ossec/assets/cardinal/js/base.js?v=1.0"></script>
-<script src="/ossec/assets/cardinal/js/custom.js"></script>
-<script src="/ossec/jquery-ui-1.11.1/jquery-ui.min.js" type="text/javascript"></script>
-<link href="/ossec/jquery-ui-1.11.1/jquery-ui.css" rel="stylesheet" type="text/css" />
-<link href="/ossec/jquery-ui-1.11.1/jquery-ui.theme.css" rel="stylesheet" type="text/css" />
+<script src="../assets/cardinal/js/base.js?v=1.0"></script>
+<script src="../assets/cardinal/js/custom.js"></script>
+<script src="../jquery-ui-1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+<link href="../jquery-ui-1.11.1/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="../jquery-ui-1.11.1/jquery-ui.theme.css" rel="stylesheet" type="text/css" />
 
 
         <?php

@@ -42,14 +42,14 @@
 <!-- custom JS -->
 <script src="assets/cardinal/js/base.js?v=1.0"></script>
 <script src="assets/cardinal/js/custom.js"></script>
-<script src="/ossec/jquery-ui-1.11.1/jquery-ui.min.js" type="text/javascript"></script>
-<link href="/ossec/jquery-ui-1.11.1/jquery-ui.css" rel="stylesheet" type="text/css" />
-<link href="/ossec/jquery-ui-1.11.1/jquery-ui.theme.css" rel="stylesheet" type="text/css" />
+<script src="jquery-ui-1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+<link href="jquery-ui-1.11.1/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="jquery-ui-1.11.1/jquery-ui.theme.css" rel="stylesheet" type="text/css" />
 
 <!-- Include one of jTable styles. -->
-<link href="/ossec/jtable.2.4.0/themes/metro/lightgray/jtable.min.css" rel="stylesheet" type="text/css" />
+<link href="jtable.2.4.0/themes/metro/lightgray/jtable.min.css" rel="stylesheet" type="text/css" />
 <!-- Include jTable script file. -->
-<script src="/ossec/jtable.2.4.0/jquery.jtable.min.js" type="text/javascript"></script>
+<script src="jtable.2.4.0/jquery.jtable.min.js" type="text/javascript"></script>
 
 <script src="assets/ossec-mgmt.js" type="text/javascript"></script>
 
@@ -97,21 +97,6 @@
           <button type="button" class="navbar-toggle btn-navbar" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="menu-text">Menu</span></button>
           <!-- /nav-collapse -->
           
-            <!--
-          <div class="navbar-collapse collapse"> 
-            <div id="nav-search" role="search">
-              <form action="http://www.stanford.edu/search" method="get" id="search-form" accept-charset="UTF-8">
-                <h2 class="hidden">Search form</h2>
-                <label class="hidden" for="search-field">Search term</label>
-                <input name="cx" type="hidden" value="003265255082301896483:sq5n7qoyfh8">
-                <input name="cof" type="hidden" value="FORID:9">
-                <input name="ie" type="hidden" value="UTF-8">
-                <input name="as_sitesearch" type="hidden" value="facts.stanford.edu">
-                <input title="Search string" class="input-medium" placeholder="Search this site&hellip;" type="text" id="search-field" name="q" value="" size="15" maxlength="128" />
-                <button id="search-btn" type="submit" name="submit"  aria-label="Search" formmethod="get"><i class="fa fa-search"></i></button>
-              </form>
-            </div>
-              -->
             <div  role="navigation">
               <div id="primary-nav">
                 <ul class="nav navbar-nav" aria-label="primary navigation">
@@ -157,7 +142,25 @@
                 </form>
               </p>
           </div>
+          <!-- 
+            There is an issue with the footer overlapping on the jtable in
+            only Safari/Chrome.  After looking into why, I settled on the easy
+            fix of adding padding-bottom on those platforms.
+          -->
+          <?php 
+            $safariorchrome = 
+              strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') ? true : false;
+            if ($safariorchrome) {
+          ?>
+          <div id="ossecContainer" style='padding-bottom: 335px;'></div>
+          <?php 
+            }
+            else {
+          ?>
           <div id="ossecContainer"></div>
+          <?php
+            }
+          ?>
           <div>
             <p />
             <p>
