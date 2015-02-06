@@ -1,3 +1,5 @@
+// TODO cleanup formatting
+
 $(document).ready(function () {
   $('#ossecContainer').jtable({
       sorting: false,
@@ -12,9 +14,9 @@ $(document).ready(function () {
       sorting: true,
       defaultSorting: 'Name',
       actions: {
-          listAction: '/ossec/List.php',
-          createAction: '/ossec/Create.php',
-          deleteAction: '/ossec/Delete.php'
+          listAction: './List.php',
+          deleteAction: './Delete.php',
+          createAction: myCreateAction
       },
       fields: {
           SystemId: {
@@ -257,14 +259,14 @@ $(document).ready(function () {
 
 });
 
-function ExpandSysButton() {
+function ExpandSys() {
       var $selectedRows = $('#ossecContainer').jtable('selectedRows');
       $selectedRows.each(function() {
           $(this).find("img").first().trigger('click');
       });
 }
 
-function ExpandRootButton() {
+function ExpandRoot() {
       var $selectedRows = $('#ossecContainer').jtable('selectedRows');
       $selectedRows.each(function() {
           $(this).find("img").last().trigger('click');
@@ -355,7 +357,7 @@ function UpdateRootSelected() {
 }
 
 function UpdateSysSelected() {
-    $("#dialog-confirm").html("Are you sure you want to clear/update the selected syscheck reports? This should only be done after reviewing the reports.");
+  $("#dialog-confirm").html("Are you sure you want to clear/update the selected syscheck reports? This should only be done after reviewing the reports.");
 
   // Define the Dialog and its properties.
   $("#dialog-confirm").dialog({
@@ -393,4 +395,43 @@ function clearUser() {
   var user = document.getElementById("user");
   var sysadmin = document.getElementById("sysadmin");
   user.selectedIndex = -1;
+}
+
+// call an action based on the selected menu item.
+function actions() {
+  var e = document.getElementById("myActions");
+  var val = e.value;
+  e.selectedIndex = -1;
+  if (val == 'expandsys') {
+    ExpandSys();
+  } else if (val == 'expandroot') {
+    ExpandRoot();
+  } else if (val == 'updatesys') {
+    UpdateSysSelected();
+  } else if (val == 'updateroot') {
+    UpdateRootSelected();
+  } else if (val == 'updatesysall') {
+    UpdateSysAll();
+  } else if (val == 'updaterootall') {
+    UpdateRootAll();
+  } else if (val == '') {
+    // noop
+  } else {
+    $("#dialog-confirm").html("Error - the action you tried to call wasn't found: " + val);
+
+    // Define the Dialog and its properties.
+    $("#dialog-confirm").dialog({
+      resizable: false,
+      modal: true,
+      title: "Error calling action",
+      height: 250,
+      width: 400,
+      buttons: {
+        "Dismiss": function () {
+          $(this).dialog('close');
+        }
+      }
+    });
+  }
+
 }

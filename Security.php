@@ -190,8 +190,8 @@ function i_get_roles ($dbhandle, $user, $server) {
   $r = remctl_new();
   remctl_set_ccache($r, $k5_ticket_cache);
   $result = remctl('netdb-node-roles-rc.stanford.edu', 0, '', $command);
-  if ($result->error) {
-    fatal_error_popup("Remctl node roles returned error: ".$result->error);
+  if ($result->stderr != '' || $result->error) {
+    fatal_error_popup("Remctl node roles returned error: ".$result->stderr);
     return;
   } 
   else {
@@ -210,7 +210,7 @@ function i_get_roles ($dbhandle, $user, $server) {
       $r_t = 1;
     }
   }
- 
+  #if ($debug) echo "DEBUG: In i_get_roles -- perms for $server are $r_u, $r_a, $r_t\n";
   return array($r_u, $r_a, $r_t);
 }
 

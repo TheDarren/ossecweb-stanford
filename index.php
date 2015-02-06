@@ -50,7 +50,21 @@
 <link href="jtable.2.4.0/themes/metro/lightgray/jtable.min.css" rel="stylesheet" type="text/css" />
 <!-- Include jTable script file. -->
 <script src="jtable.2.4.0/jquery.jtable.min.js" type="text/javascript"></script>
-
+<?php 
+require './config.php';
+require './Security.php';
+if (($limit_add_to_admin && i_is_admin($_SERVER['REMOTE_USER'])) || 
+  ! $limit_add_to_admin) {
+?>
+<script type="text/javascript">var myCreateAction="'./Create.php'";</script>
+<?php
+} 
+else {
+?>
+<script type="text/javascript">var myCreateAction=undefined;</script>
+<?php 
+}
+?>
 <script src="assets/ossec-mgmt.js" type="text/javascript"></script>
 
 </head>
@@ -128,8 +142,22 @@
                 <form>
                   <table>
                     <tr>
+                      <td>Perform action:</td>
+                      <td><select id='myActions' onChange='actions();'>
+                        <option default=true value=''></option>
+                        <option value='expandsys'>Expand syscheck for selected</option>
+                        <option value='expandroot'>Expand rootcheck for selected</option>
+                        <option value='updatesys'>Update syscheck for selected</option>
+                        <option value='updateroot'>Update rootcheck for selected</option>
+                        <option value='updatesysall'>Update syscheck for ALL systems</option>
+                        <option value='updaterootall'>Update rootcheck for ALL systems</option>
+                      </select></td>
+                    </tr>
+                    <tr>
                       <td>Search host name: </td><td><input type="text" name="name" id="name" />&nbsp;&nbsp;</td>
                     </tr>
+                    <!-- start filter by sysadmin -->
+                    <?php require 'config.php'; if ($filter_by_sysadmin) { ?>
                     <tr>
                       <td>Return only my servers: &nbsp;&nbsp;</td><td><input type="checkbox" name="sysadmin" id="sysadmin" value="true" onclick="clearUser();"></td>
                     </tr>
@@ -137,6 +165,8 @@
                       <td>... Or select sysadmin:</td>
                       <td><?php require './Users.php'; ?></td>
                     </tr>
+                    <!-- end filter by sysadmin -->
+                    <?php } ?>
                     </table>
                   <button type="submit" id="LoadRecordsButton">Find Server(s)</button>
                 </form>
@@ -170,36 +200,8 @@
         </div>
         <div id="sidebar-second" class="col-md-3 col-md-pull-9">
           <div class="well">
-            <h2>Expand...</h2>
-              <button onclick="ExpandSysButton();">... syscheck for selected</button><br />
-              <button onclick="ExpandRootButton();">... rootcheck for selected</button><br />
-            <h2>Update...</h2>
-              <button onclick="UpdateSysSelected();">... syscheck for selected</button><br />
-              <button onclick="UpdateRootSelected();">... rootcheck for selected</button><br /> &nbsp;<br />
-
-              <button onclick="UpdateSysAll();">... syscheck for ALL</button><br />
-              <button onclick="UpdateRootAll();">... rootcheck for ALL</button><br />
-
-            <h2>About OSSEC Management</h2>
-            <p>The following management interface is built on jtable/jquery.</p>
-            <p>Use the "Add new record" button (top right in the table) to add a new OSSEC client (add using the FQDN only). Retrieve the agent key by clicking in the "Key" column for the new server. To delete a OSSEC client, click the trash icon in the row listing the server.</p>
-            <p>The two left columns for "Sys" and "Root" expand down when you click the icon to show you syscheck and rootcheck reports respectively.  Once these are expanded, you can click the X in the top right of the drop-down table to close the view, or click the trash icon to clear the syscheck or rootcheck report.  Be careful to click the correct trash icon in the report sub-table row instead of the system list.</p>
-            <p>Access control is managed via webauth for workgroup crc:crcsg</p>
+          <?php require './leftbar.php'; ?>
           </div>
-          <div class="well">
-          <h2>Related Tools</h2>
-          <p>Check out our <a href="./webui">OSSEC Web UI</a></p>
-          <p>For a few graphs of our environment, see the <a href="./dash">Dashboard</a></p>
-          <p>For those who want to use the command line, there are remctl tools available using your root principal.  Specific commands are:
-          <ul>
-          <li>remctl crclogs syscheck ...</li>
-          <li>remctl crclogs rootcheck ...</li>
-          <li>remctl crclogs list_agents ...</li>
-          <li>remctl crclogs agent_control ...</li>
-          <li>remctl crclogs ossecadd ...</li>
-          <li>remctl crclogs ossecdel ...</li>
-          </ul>
-      </div>
     </div>
     <!-- #content--> 
     
@@ -214,22 +216,7 @@
   <div class="container">
     <div id="footer-content" class="row">
       <div class="col-xs-12 col-sm-6 col-sm-push-3">
-        <h3>Feedback...</h3>
-        <p>Please let Darren know if you find bugs or issues.  Current open issues are: 
-            <ul>
-                <li>- Customize confirmation messages for syscheck and rootcheck delete/clear.</li>
-            </ul>
-        </p>
-      </div>
-      <div class="col-xs-12 col-sm-3 col-sm-push-3">
-        <h3>Related Links</h3>
-        <ul>
-          <li>Checkout our <a href="./webui">OSSEC Web UI</a></li>
-          <li><a href="./dash">OSSEC Dashboard</a> (graphs of our environment)</li>
-          <li><a href="https://itarch.stanford.edu/confluence/display/CRCSRVRGRP/OSSEC">OSSEC Confluence Documentation</a></li>
-          <li><a href="http://ossec.net/">OSSEC.net</a></li>
-        </ul>
-      </div>
+        <?php require './footer.php'; ?>
      </div>
   </div>
   <!-- Fat footer end -->

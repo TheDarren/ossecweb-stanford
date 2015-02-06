@@ -3,16 +3,22 @@
 # Array of admins listed by sunetid - this assumes webauth is in use.
 $admins = [ 'darrenp1', 'jmcdermo', 'atayts' ];
 
-# Timeout in min to flush the user and server cache.
+# int - Timeout in min to flush the user and server cache.
 $cache_timeout = 240;
 
-# Enable debugging (if set to 1) - only useful for cli debugging.
-$debug = 0;
+# bool - Enable debugging - only useful for cli debugging.
+$debug = false;
 
 # Path to the ticket cache. This should be maintained by a k5start job.
-$k5_ticket_cache='/var/tmp/service.crcweb';
+$k5_ticket_cache='/var/run/web/crcweb.k5.tgt';
 
 # Path to the slite db.
 $db_path = 'db/ossec.db';
+
+# bool - Enable/disable filtering by sysadmin
+$filter_by_sysadmin = true;
+
+# bool - Limit adding to admins only?
+$limit_add_to_admin = true;
 
 ?>
