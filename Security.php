@@ -2,10 +2,10 @@
 
 # Check if required extensions are loaded.
 if (!extension_loaded('remctl')) {
-  die ("Failed to load remctl extension\n");
+  fatal_error_popup("Failed to load remctl extension\n");
 }
 if (!extension_loaded('sqlite3')) {
-  die ("Failed to load sqlite extension\n");
+  fatal_error_popup("Failed to load sqlite extension\n");
 }
 
 
@@ -111,6 +111,15 @@ function i_set_cached ($dbhandle, $user) {
 
 function purgedb ($dbhandle, $min) {
   require 'config.php';
+
+  # Delete all server rows w/ sunetid != current user table entries. EG orphan.
+  $delstm = 'DELETE FROM server WHERE server.sunetid NOT IN (SELECT '.
+    'user.sunetid FROM user)';
+  $ok = $dbhandle->exec($delstm);
+  if (!$ok) {
+    fatal_error_popup('failed to delete server rows for missing users.');
+  }
+
   $stm = 'SELECT sunetid FROM user WHERE date < (SELECT strftime(\'%s\', '.
     '\'now\', \'-'.$min.' minutes\'))';
   $results = $dbhandle->query($stm)->fetchArray();
@@ -127,14 +136,15 @@ function purgedb ($dbhandle, $min) {
     $delstm = 'DELETE FROM server WHERE sunetid=\''.$row.'\'';
     $ok = $dbhandle->exec($delstm);
     if (!$ok) {
-      die ('failed to delete server row for '.$row);
+      fatal_error_popup('failed to delete server row for '.$row);
     }
     $delstm = 'DELETE FROM user WHERE sunetid=\''.$row.'\'';
     $ok = $dbhandle->exec($delstm);
     if (!$ok) {
-      die ('failed to delete user row for '.$row);
+      fatal_error_popup('failed to delete user row for '.$row);
     }
   }
+
   if ($debug) {
     echo "DEBUG: In purgedb -- dumping servers\n\n";
     var_dump($dbhandle->query('SELECT * FROM server')->fetchArray());

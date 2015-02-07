@@ -1,7 +1,7 @@
 <?php
 
 # Array of admins listed by sunetid - this assumes webauth is in use.
-$admins = [ 'darrenp1', 'jmcdermo', 'atayts' ];
+$admins = [  '', '' ];
 
 # int - Timeout in min to flush the user and server cache.
 $cache_timeout = 240;
