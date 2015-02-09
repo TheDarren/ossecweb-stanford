@@ -74,7 +74,7 @@ Some behavior is configurable in the config.php file.  Specifically:
 
 HOW TO INSTALL:
 
-- Make sure ossec-hids (master in /var/ossec), apache, webauth, php5, php5 remctl, k5start and sudo are installed and configured.
+- Make sure ossec-hids (master in /var/ossec), apache, webauth, php5, php5 remctl, php5-sqlite, k5start and sudo are installed and configured.
 
 - All servers in the ossec-hids (master) install must have names that correlate to FQDN. This is required for access control integration with netdb node roles.
 
