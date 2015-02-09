@@ -76,6 +76,8 @@ HOW TO INSTALL:
 
 - Make sure ossec-hids (master in /var/ossec), apache, webauth, php5, php5 remctl, php5-sqlite, k5start and sudo are installed and configured.
 
+- On Debian/Ubuntu (and CentOS/RHEL?), you will need to create a config for the php remctl extension so it loads.  Do this on Debian/Ubuntu by creating a remctl.ini file in /etc/php5/mods-available with contents "extension=remctl.so", soft link it to /etc/php5/conf.d/20-remctl.ini and restart apache.
+
 - All servers in the ossec-hids (master) install must have names that correlate to FQDN. This is required for access control integration with netdb node roles.
 
 - Request a service keytab and install it on the server.
