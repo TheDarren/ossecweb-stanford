@@ -56,7 +56,7 @@ require './Security.php';
 if (($limit_add_to_admin && i_is_admin($_SERVER['REMOTE_USER'])) || 
   ! $limit_add_to_admin) {
 ?>
-<script type="text/javascript">var myCreateAction="'./Create.php'";</script>
+<script type="text/javascript">var myCreateAction="./Create.php";</script>
 <?php
 } 
 else {

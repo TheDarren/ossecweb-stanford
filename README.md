@@ -72,3 +72,35 @@ Some behavior is configurable in the config.php file.  Specifically:
   $limit_add_to_admin = true;
 
 
+HOW TO INSTALL:
+
+- Make sure ossec-hids (master in /var/ossec), apache, webauth, php5, php5 remctl, k5start and sudo are installed and configured.
+
+- All servers in the ossec-hids (master) install must have names that correlate to FQDN. This is required for access control integration with netdb node roles.
+
+- Request a service keytab and install it on the server.
+
+- Request a netdb account for your service keytab principal.
+
+- Setup a supervise or upstart job to maintain a ticket cache with k5start using your service keytab.  The resulting ticket cache needs to be readable by the apache user for use with k5start.
+
+- Test access to netdb node roles from your service keytab using: "KRB5CCNAME='/path/to/ticket/cache' remctl netdb-node-roles-rc netdb node-roles SUNETID FQDN".  Use your sunetid and a server you have user, admin or team privileges to in netdb and confirm the output of the command.
+
+- Configure apache and webauth with the restrictions you want for a web area to put this ossec web management tool (EG: /var/ossecweb).
+
+- Add the sudoers file to allow php to call ossec management utilities.  This is a convenience to let apache run ossec utilities.
+
+- Add your apache user to the ossec group to allow the webUI to function correctly.
+
+- Clone the github repo to the webauth area you setup (EG: /var/ossecweb).
+
+- Soft link the add/rm utility scripts to /usr/local/bin from the bin dir.  (EG: ln -s /var/ossecweb/bin/* /usr/local/bin/)
+
+- Look through the config.php file and change any options as desired/needed.
+
+- Make sure the db subdir (EG: /var/ossecweb/db) has write permissions from the apache user, or optionally just the sqlite db file as configured in config.php.
+
+- Login through webauth to the area you setup.  Even if everything looks good, look at your apache error log to look for any errors/failures.
+
+- Optionally customize the leftbar.php and footer.php.
+

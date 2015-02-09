@@ -4,9 +4,10 @@ require 'Security.php';
 require 'config.php';
 # Init security db to check for r or w access.
 $db = dbinit($_SERVER['REMOTE_USER']);
+$user = $_SERVER['REMOTE_USER'];
 
 $name = $_POST['Name'];
-if (!i_is_admin($name) && $limit_add_to_admin) {
+if ((!i_is_admin($user)) && $limit_add_to_admin) {
   $json['Result'] = 'Error';
   $json['Message'] = 'Create is limited to admins by configuration!';
   echo json_encode($json);
@@ -14,7 +15,7 @@ if (!i_is_admin($name) && $limit_add_to_admin) {
 }
 
 if (checkdnsrr($name, 'A') or checkdnsrr($name, 'CNAME')) {
-  if (has_w_access($db, $_SERVER['REMOTE_USER'], $name)) {
+  if (has_w_access($db, $user, $name)) {
     $create = shell_exec("sudo /usr/local/bin/ossec-add $name 2>&1");
     $systems = array_filter(str_getcsv(shell_exec('sudo /var/ossec/bin/syscheck_control -ls'), "\n" ));
     $headers = array ('SystemId', 'Name', 'IP', 'Active');
