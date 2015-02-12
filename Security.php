@@ -15,6 +15,7 @@ if (!extension_loaded('sqlite3')) {
 function dbinit ($user) {
   require 'config.php';
   $dbhandle = new SQLite3($db_path);
+  $dbhandle->busyTimeout(6000);
   if (!$dbhandle) {
     fatal_error_popup('sqlite error: '.$dbquery->lastErrorMsg());
     return;
