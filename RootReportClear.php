@@ -32,6 +32,7 @@ else {
           $json['Result'] = 'OK';
         }
       }
+    }
   }
   else {
     $systems = array_filter(explode("\n", shell_exec('sudo /var/ossec/bin/syscheck_control -ls')));
