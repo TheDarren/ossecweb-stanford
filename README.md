@@ -71,6 +71,9 @@ Some behavior is configurable in the config.php file.  Specifically:
   # bool - Limit adding to admins only?
   $limit_add_to_admin = true;
 
+  # int - Timeout in ms for sqlite3 (note: 1000 ms in 1 second)
+  $busyTimeout = 6000;
+
 
 HOW TO INSTALL:
 
