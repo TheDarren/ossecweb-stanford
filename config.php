@@ -1,7 +1,7 @@
 <?php
 
 # Array of admins listed by sunetid - this assumes webauth is in use.
-$admins = [  '', '' ];
+$admins = [ 'jmcdermo', 'atayts' ];
 
 # int - Timeout in min to flush the user and server cache.
 $cache_timeout = 240;
@@ -20,5 +20,8 @@ $filter_by_sysadmin = true;
 
 # bool - Limit adding to admins only?
 $limit_add_to_admin = true;
+
+# Timeout in ms for sqlite3 (note: 1000 ms in 1 second)
+$busyTimeout = 6000;
 
 ?>
