@@ -7,10 +7,10 @@ $db = dbinit($_SERVER['REMOTE_USER']);
 $id = $_POST['SystemId'];
 $delete;
 $systems = array();
-$systems = shell_exec("sudo /var/ossec/bin/syscheck_control -ls 2>&1");
+$systems = shell_exec('sudo /var/ossec/bin/syscheck_control -ls 2>&1');
 # Set error prior to trying to loop through systems.
-$json['Result'] = "Error";
-$json['Message'] = "Failed to list systems";
+$json['Result'] = 'Error';
+$json['Message'] = 'Failed to list systems';
 
 foreach (str_getcsv($systems, "\n") as $line) {
   $vals = str_getcsv($line);
@@ -19,11 +19,11 @@ foreach (str_getcsv($systems, "\n") as $line) {
     if (has_w_access($db,$_SERVER['REMOTE_USER'],$name)) {
       $delete = shell_exec("sudo /usr/local/bin/ossec-del $name 2>&1");
       if ($delete != '') {
-        $json['Result'] = "Error";
+        $json['Result'] = 'Error';
         $json['Message'] = "Failed to delete $name: $delete";
       }
       else {
-        $json['Result'] = "OK";
+        $json['Result'] = 'OK';
       }
     }
     else {

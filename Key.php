@@ -11,19 +11,19 @@ $json['Result'] = 'Error';
 $json['Message'] = "SystemId provided ($id) was not found.";
 
 if (!is_numeric($id)) {
-  $json['Result'] = "Error";
+  $json['Result'] = 'Error';
   $json['Message'] = "Provided SystemId is not an integer: $id";
 }
 else {
-  $systems = array_filter(explode("\n", shell_exec("sudo /var/ossec/bin/syscheck_control -ls")));
+  $systems = array_filter(explode("\n", shell_exec('sudo /var/ossec/bin/syscheck_control -ls')));
   foreach ($systems as $row) {
-    $r = array_filter(explode(",", $row));
+    $r = array_filter(explode(',', $row));
     if ($r[0] == $id) {
       if (has_r_access($db, $_SERVER['REMOTE_USER'], $r[1])) {
-        $results["Report"] = "<textarea cols=85 rows=7 readonly>\n" . htmlspecialchars(shell_exec("sudo /var/ossec/bin/manage_agents -e $id")). "\n</textarea>\n";
-        $results["SystemId"] = $id;
+        $results['Report'] = "<textarea cols=85 rows=7 readonly>\n" . htmlspecialchars(shell_exec("sudo /var/ossec/bin/manage_agents -e $id")). "\n</textarea>\n";
+        $results['SystemId'] = $id;
 
-        $json['Result'] = "OK";
+        $json['Result'] = 'OK';
         $json['Records'] = array($results);
       }
       else {

@@ -68,6 +68,9 @@ Some behavior is configurable in the config.php file.  Specifically:
   # bool - Enable/disable filtering by sysadmin
   $filter_by_sysadmin = true;
 
+  # string - Puppet su_support match (used in conjunction w/ filter_by_sysadmin)
+  $su_support = 'SA-CRC';
+
   # bool - Limit adding to admins only?
   $limit_add_to_admin = true;
 

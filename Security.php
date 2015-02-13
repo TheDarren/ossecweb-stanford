@@ -20,23 +20,23 @@ function dbinit ($user) {
     fatal_error_popup('sqlite error: '.$dbquery->lastErrorMsg());
     return;
   }
-  $stm = "CREATE TABLE IF NOT EXISTS server(id INTEGER PRIMARY KEY," .
-    " sunetid TEXT NOT NULL, server TEXT NOT NULL, r_user INTEGER,".
-    " r_admin INTEGER, r_team INTEGER )";
+  $stm = 'CREATE TABLE IF NOT EXISTS server(id INTEGER PRIMARY KEY,' .
+    ' sunetid TEXT NOT NULL, server TEXT NOT NULL, r_user INTEGER,'.
+    ' r_admin INTEGER, r_team INTEGER )';
 
   $ok = $dbhandle->exec($stm);
   if (!$ok) {
-    fatal_error_popup("sqlite cannot execute query. ".
+    fatal_error_popup('sqlite cannot execute query. '.
       $dbhandle->lastErrorMsg());
     return;
   }
 
-  $stm = "CREATE TABLE IF NOT EXISTS user(id INTEGER PRIMARY KEY," .
-    " date INTEGER, sunetid STRING )";
+  $stm = 'CREATE TABLE IF NOT EXISTS user(id INTEGER PRIMARY KEY,' .
+    ' date INTEGER, sunetid STRING )';
   
   $ok = $dbhandle->exec($stm);
   if (!$ok) {
-    fatal_error_popup("Cannot execute query. ".
+    fatal_error_popup('Cannot execute query. '.
       $dbhandle->lastErrorMsg());
     return;
   }
@@ -47,15 +47,15 @@ function dbinit ($user) {
   # check if sunetid is in user table
   if (! i_is_cached($dbhandle, $user)) {
     # loop through and populate server table
-    $systems = array_filter(explode("\n", shell_exec("sudo /var/ossec/bin/syscheck_control -ls")));
+    $systems = array_filter(explode("\n", shell_exec('sudo /var/ossec/bin/syscheck_control -ls')));
     # kept here for reference for fields from syscheck_control csv output
     #$headers = array ("SystemId", "Name", "IP", "Active");
     $mysys = array();
     foreach ($systems as $row) {
-      $row = rtrim($row, ",");
+      $row = rtrim($row, ',');
       $row = str_getcsv($row);
       # lookup netdb node roles for $row[1] for $user
-      $roles = i_get_roles($dbhandle, $user, split(" ", $row[1])[0]);
+      $roles = i_get_roles($dbhandle, $user, split(' ', $row[1])[0]);
 
       i_add($dbhandle, $user, $row[1], $roles[0], $roles[1], $roles[2]);
     }
@@ -202,7 +202,7 @@ function i_get_roles ($dbhandle, $user, $server) {
   remctl_set_ccache($r, $k5_ticket_cache);
   $result = remctl('netdb-node-roles-rc.stanford.edu', 0, '', $command);
   if ($result->stderr != '' || $result->error) {
-    fatal_error_popup("Remctl node roles returned error: ".$result->stderr);
+    fatal_error_popup('Remctl node roles returned error: '.$result->stderr);
     return;
   } 
   else {

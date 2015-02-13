@@ -20,10 +20,10 @@ else {
     $r = array_filter(explode(',', $row));
     if ($r[0] == $id) {
       if (has_r_access($db, $_SERVER['REMOTE_USER'], $r[1])) {
-        $results["Report"] = nl2br(htmlspecialchars(shell_exec("sudo /var/ossec/bin/rootcheck_control -i $id")));
-        $results["SystemId"] = $id;
+        $results['Report'] = nl2br(htmlspecialchars(shell_exec("sudo /var/ossec/bin/rootcheck_control -i $id")));
+        $results['SystemId'] = $id;
 
-        $json['Result'] = "OK";
+        $json['Result'] = 'OK';
         $json['Records'] = array($results);
       }
       else {
